@@ -1,0 +1,13 @@
+{
+  "name": "carreel",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Short-video marketplace for cars, parts, robotics and automotive tech sourced from China.",
+  "workspaces": ["server", "web"],
+  "scripts": {
+    "dev": "npm run dev --workspace server & npm run dev --workspace web",
+    "build": "npm run build --workspace web",
+    "start": "npm run start --workspace server",
+    "test": "npm test --workspace server"
+  }
+}
