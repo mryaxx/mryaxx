@@ -14,7 +14,7 @@
 |---|---|
 | Auth & identity | Real auth (OAuth/passkeys + sessions or JWT). **Dealer KYC/KYB**: business licence, export licence. Buyer verification before bidding. |
 | Database | Postgres. Tables mirror the JSON collections: users, listings, media, lots, bids, comments, likes, saves, follows, orders, inquiries. Bids need a transaction/row lock on the listing to avoid race conditions. |
-| Media | Object storage (S3/OSS) + CDN. Transcoding to HLS (see REDPLAYER.md). Content moderation on uploads. |
+| Media | Object storage (S3/OSS) + CDN. Transcoding to HLS (see VIDEO.md). Content moderation on uploads. |
 | Payments | Escrow deposits via a provider that supports cross-border payouts to CN merchants. Buyer's premium, deposit refunds, and settlement on lot close. |
 | Auctions | Lot-close job that marks winners and creates orders. Proxy (max) bidding. Real-time bid updates over WebSocket/SSE. |
 | Feed ranking | Replace the heuristic in `/api/feed` with a ranking service fed by watch-time, completion rate, saves and inquiries. Personalise by destination country and budget. |

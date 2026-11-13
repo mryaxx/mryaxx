@@ -68,6 +68,8 @@ import xyz.mpv.rex.ui.browser.networkstreaming.NetworkStreamingScreen
 import xyz.mpv.rex.ui.browser.playlist.PlaylistScreen
 import xyz.mpv.rex.ui.browser.recentlyplayed.RecentlyPlayedScreen
 import xyz.mpv.rex.ui.browser.shorts.ShortsScreen
+import xyz.mpv.rex.carreel.CarReelScreen
+import androidx.compose.material.icons.filled.DirectionsCar
 import xyz.mpv.rex.ui.browser.you.YouScreen
 import xyz.mpv.rex.ui.browser.selection.SelectionManager
 import xyz.mpv.rex.ui.browser.miniplayer.MiniPlayer
@@ -213,6 +215,12 @@ object MainScreen : Screen {
       homeLabel, shortsLabel, youLabel, recentsLabel, playlistsLabel, networkLabel
     ) {
       val rawTabs = buildList {
+        // CarReel marketplace feed (new). Not in the saved tab order, so it sorts first and opens by default.
+        add(
+          VisibleTab("cars", "Cars", Icons.Filled.DirectionsCar) {
+            CarReelScreen()
+          }
+        )
         add(
           VisibleTab("home", homeLabel, Icons.Filled.Home) {
             FolderListScreen.Content()
@@ -260,7 +268,11 @@ object MainScreen : Screen {
       val orderList = browserPreferences.getBottomNavOrder()
       rawTabs.sortedBy { tab ->
         val idx = orderList.indexOf(tab.id)
-        if (idx == -1) Int.MAX_VALUE else idx
+        when {
+          tab.id == "cars" -> -1 // CarReel feed is always the first tab
+          idx == -1 -> Int.MAX_VALUE
+          else -> idx
+        }
       }
     }
 

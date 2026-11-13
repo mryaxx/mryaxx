@@ -24,6 +24,8 @@ export const CATEGORIES = [
 
 export const CONDITIONS = ['new', 'refurbished', 'used'];
 
+const SAMPLE_VIDEOS = ['byd', 'xiaomi', 'zeekr', 'great-wall', 'robotics', 'automotive-tech'];
+
 const DEALERS = [
   { handle: 'shenzhen_ev_hub', name: 'Shenzhen EV Hub', city: 'Shenzhen', bio: 'Factory-direct NEVs. Export docs, RoRo & container from Shekou.' },
   { handle: 'shanghai_motors_export', name: 'Shanghai Motors Export', city: 'Shanghai', bio: 'Licensed exporter. Brand new & zero-km cars, CIF worldwide.' },
@@ -189,6 +191,16 @@ export function buildSeed() {
 
   // Every seeded listing gets generated poster art (served by /media/poster/:id.svg).
   for (const l of listings) l.media = [{ type: 'image', url: `/media/poster/${l.id}.svg` }];
+
+  // A few listings lead with a short sample video reel (server/sample-media) so the feed exercises real video playback.
+  const withVideo = new Set();
+  for (const l of listings) {
+    const key = l.category === 'cars' ? l.brand : l.category;
+    if (SAMPLE_VIDEOS.includes(key) && !withVideo.has(key)) {
+      withVideo.add(key);
+      l.media.unshift({ type: 'video', url: `/sample-media/${key}.mp4`, poster: `/media/poster/${l.id}.svg` });
+    }
+  }
 
   const bids = [];
   for (const l of listings.filter((x) => x.sale === 'auction')) {

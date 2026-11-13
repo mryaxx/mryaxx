@@ -14,7 +14,7 @@ android {
   compileSdk = 36
 
   defaultConfig {
-    applicationId = "xyz.mpv.rex"
+    applicationId = "com.carreel.app"
     minSdk = 26
     targetSdk = 36
     versionCode = 217

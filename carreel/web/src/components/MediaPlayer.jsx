@@ -6,8 +6,8 @@ import { useEffect, useRef, useState } from 'react';
  * Web: HTML5 <video> (MP4 everywhere, HLS natively on Safari/iOS). Images get a slow
  * "Ken Burns" pan so photo listings still feel like reels.
  *
- * Native apps: this component's contract (src, active, muted, onDoubleTap) is what the
- * REDPlayer bridge implements on Android/iOS/HarmonyOS. See docs/REDPLAYER.md.
+ * The Android app does the same job with REX Player's libmpv surface (android/.../carreel/CarReelScreen.kt).
+ * See docs/VIDEO.md.
  */
 export default function MediaPlayer({ media, active, muted, onToggleMute, onDoubleTap, preload = false }) {
   const ref = useRef(null);

@@ -107,3 +107,12 @@ test('comments validate input', async () => {
   const list = await call('GET', '/api/listings/l_2/comments');
   assert.equal(list.body[0].text, 'RHD available?');
 });
+
+test('sample video reels are seeded and served', async () => {
+  const { body } = await call('GET', '/api/listings?limit=50&brand=byd');
+  const withVideo = body.items.find((l) => l.media[0].type === 'video');
+  assert.ok(withVideo, 'a BYD listing leads with video');
+  const res = await fetch(base + withVideo.media[0].url, { method: 'HEAD' });
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get('content-type'), 'video/mp4');
+});

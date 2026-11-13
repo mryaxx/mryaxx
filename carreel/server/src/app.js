@@ -2,6 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { BRANDS, CATEGORIES, CONDITIONS } from './seed.js';
 import { createStore } from './store.js';
 import { quote, COUNTRIES } from './shipping.js';
@@ -352,6 +353,7 @@ export function createApp({ dataFile, uploadDir = path.join(process.cwd(), 'uplo
     res.type('image/svg+xml').set('Cache-Control', 'public, max-age=86400').send(posterSvg(l));
   });
   if (uploadDir) app.use('/uploads', express.static(uploadDir, { maxAge: '7d' }));
+  app.use('/sample-media', express.static(fileURLToPath(new URL('../sample-media', import.meta.url)), { maxAge: '7d' }));
 
   app.use('/api', (_req, res) => res.status(404).json({ error: 'Not found' }));
 

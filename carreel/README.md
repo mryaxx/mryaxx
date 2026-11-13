@@ -25,6 +25,8 @@ npm run dev        # API on :4000, web app on :5173 (open this one)
 
 Production-style: `npm run build && npm start`, then open http://localhost:4000.
 
+**Android app**: `android/` is a fork of [REX Player](https://github.com/mpvRex/REX-Player) (libmpv) with a new **Cars** tab, which is this same feed running natively. Build and run steps are in `android/CARREEL.md`.
+
 Tests: `npm test` (API: feed paging, filters, likes, bidding rules, shipping and orders, dealer posting, following feed, comments).
 
 Sign in with any **demo account** from the sign-in sheet. Dealers (e.g. *Shenzhen EV Hub*) can post. Buyers (e.g. *Amina O., Lagos*) can bid and buy.
@@ -36,7 +38,8 @@ Demo data lives in `server/data/db.json`. Delete it to reset.
 carreel/
   server/   Express API, JSON store, seed catalog, shipping model, generated poster art
   web/      React + Vite mobile-first PWA (the TikTok/Instagram UI)
-  docs/     ARCHITECTURE.md (production roadmap), REDPLAYER.md (native video player plan)
+  android/  Android app: REX Player fork + CarReel feed (see android/CARREEL.md)
+  docs/     ARCHITECTURE.md (production roadmap), VIDEO.md (playback on web/Android/iOS)
 ```
 
 See **docs/ARCHITECTURE.md** for what has to change before real money and real cars move through this.
